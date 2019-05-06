@@ -1,0 +1,52 @@
+function formatNames(names, option={}) {
+    if(!names) return ''
+    let result = names.split(',');
+    if(result.length ===0) return ''
+    if(option.length === 0) return ''
+    
+    if(option.sorted){
+        result.sort();
+    }
+    if(option.unique){
+        result = result.filter((value,index,ref)=>{
+            return ref.indexOf(value) === index
+        })
+    }
+    if(option.length){
+        let temp= []
+        for(let i =0;i<result.length;i++){
+            if(i === option.length-1){
+                temp += result[i] +", and "+ (result.length-1) + " more"
+                break;
+            }else if (i === result.length -2 ){
+               temp += result[i] + ', and'
+            }else if(i === result.length-1){
+                temp += result[i]
+            }else{
+              temp += result[i] + ','
+            }
+        }
+        result = temp
+    }else{
+        let temp= []
+        if(result.length ===2){
+            result = result[0]+ ' and' + result[1]
+        }
+        else if(result.length>2){
+            for(let i =0;i<result.length;i++){
+                if(i === result.length-2){
+                    temp += result[i] + ", and"
+                }else if(i === result.length-1)   
+                    temp += result[i]
+                else{
+                    temp += result[i] + ","
+                }
+            }
+            result = temp
+        }
+    }
+    
+    
+    
+    return result;
+}
